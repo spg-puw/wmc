@@ -1,0 +1,11 @@
+{
+   "firstname": "Max",
+   "lastname": "Mustermann",
+   "age": 16,
+   "isFullAge": true,
+   "address": {
+      "street": "Spengergasse 20",
+      "zip": 1050,
+      "city": "Wien"
+   }
+}
