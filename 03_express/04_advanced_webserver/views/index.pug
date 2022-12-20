@@ -1,0 +1,11 @@
+doctype html
+html
+  head
+    title Wichtige Webseite
+  body
+    h2 Das ist eine wichtige Webseite
+    each l in ['animals', 'public', 'doc']
+      a(href=l) #{l}
+      br
+    br
+    span Datum: #{moment(someDateValue).format('YYYY-MM-DD ')}

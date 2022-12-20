@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title Tierliste
+  body
+    h2 Tierliste
+    a(href='/animals/new') Neues Tier anlegen
+    br
+    ul
+      each a, idx in animals
+        li #{idx}: 
+          span(class='animal', data-id=idx) #{a}
+    pre Achtung: DELETE kann nicht mit Standard HTML erzeugt werden, es wird JS benötigt!
+
+    script
+      != "for (el of document.querySelectorAll('.animal')) {"
+      != "el.addEventListener('click', (e) => { console.log('id', e.target.dataset.id); fetch('/animals/' + e.target.dataset.id, { method:'DELETE'}); })"
+      != "}"
+    pre Achtung: Die CSP verbietet normalerweise den JS-Code (Gefahr von code injection) mit der express middleware helmet, in der aktuellen Konfiguration ist diese allerdings ausgeschaltet
