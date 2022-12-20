@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+//middleware: serve static files from folder public
+app.use("/", express.static("public"));
+
 const s = require('./Schulen.json');
 
 app.get('/a1', (req, res) => {
