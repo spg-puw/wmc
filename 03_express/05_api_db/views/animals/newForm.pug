@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    title Tierliste
+  body
+    h2 Neues Tier anlegen
+    a(href='/animals') zur Tierliste
+    br
+    form(action='.', method='POST')
+      p
+        | Tiername: 
+        input(type='text', name='animalname', value='', placeholder="Fledermaus")
+      input(type='submit', value='Speichern')
