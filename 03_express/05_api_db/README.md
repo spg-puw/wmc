@@ -1,6 +1,8 @@
 # Mini API mit DB
 
-Hier werden kurz neue Konzepte für kleine APIs vorgestellt.
+## Informationen
+
+Hier werden neue Konzepte für kleine APIs vorgestellt:
 
 * Middleware
   * `lib/customLoggingMiddleware`: gibt eine kurze Information aus wenn ein neuer request empfangen wird
@@ -20,10 +22,20 @@ Hier werden kurz neue Konzepte für kleine APIs vorgestellt.
   * die `/auth` und `/news` Routen verwenden Datenbanken (hier SQLite3)
   * die Daten werden also in einer Datei (`production.sqlite3` oder `development.sqlite3`) gespeichert
   * man kann die Datenbank ganz einfach mit Zusatzsoftware (DBeaveer oder DB Browser for SQLite) öffnen und sich alle Tabellen etc. ansehen
-  * Achtung: SQLite hat einige Einschränkungen (siehe https://www.sqlite.org/about.html)
+  * Achtung: SQLite hat einige Einschränkungen (siehe [SQLite](https://www.sqlite.org/about.html))
   * die Datenbank wird von nodejs automatisch erzeugt und geseedet (mit Werten befüllt), wenn man dan Server erstmalig startet
   * man kann auch ganz einfach den eigenen DB-Server verwenden, die verwendete Library unterstützt die gängisten DB-Systeme wie MS-SQL, MySQL/MariaDB, etc.; hier empfehlen sich XAMPP (MariaDB) oder ein eigener Docker-Container (Einstellungen in `db/config.json`)
-  * Die DB-Library ist ein ORM (Object Relational Mapper), ist damit in der Verwendung ähnlich zu EFCore bei C# etc.; die Tabellen sind JS-Objekte/Klassen und man muss idR keine SQL-Queries manuell schreiben
+  * Die DB-Library [Sequelize](https://sequelize.org/) ist ein ORM (Object Relational Mapper), ist damit in der Verwendung ähnlich zu EFCore bei C# etc.; die Tabellen sind JS-Objekte/Klassen und man muss idR keine SQL-Queries manuell schreiben
+  * Achtung: die Datenbank wurde mittels Code-First Ansatz geschrieben und alles in der Datei `db/index.js` untergebracht; bei größeren Projekten würde man die einzelnen Models (Tabellen) auf mehrere Dateien aufteilen und das CLI von Sequelize verwenden!
 * OpenAPI
   * die Endpunkte sind via OpenAPI dokumentiert; siehe `/doc`
   * bei gesicherten Endpunkten (siehe Schloss, rechte Seite beim Pfeil) muss man zuerst das entsprechende Token eintragen (und vorher natürlich generieren)
+  
+## Setup
+
+* Downloaden
+* `.env` erzeugen: `cp .env.sample .env`
+* ENV-Settings anpassen
+* `npm install`
+* `node index.js` oder `npm run dev` oder `node ./node_modules/nodemon/bin/nodemon.js index.js`
+* Die Datenbank befindet sich in `db/*.sqlite3`
