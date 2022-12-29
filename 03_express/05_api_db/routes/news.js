@@ -53,7 +53,7 @@ var db = require("../db").connect();
  */
 router.get("/", async (req, res, next) => {
     try {
-        const r = await db.model.News.findAll({
+        const r = await db.model.NewsArticle.findAll({
             attributes: ['id', 'headline', 'content', 'imageurl', ['createdAt', 'published']],
             include: [
                 {
@@ -127,7 +127,7 @@ router.post("/", guard.check(["admin"]), async (req, res, next) => {
         if (!headline || !content || !userId) {
             return res.status(400).json({ success: false, message: "bad parameters" });
         }
-        const newElement = await db.model.News.create({ author_userId: userId, headline: headline, content: content, imageurl: imageurl });
+        const newElement = await db.model.NewsArticle.create({ author_userId: userId, headline: headline, content: content, imageurl: imageurl });
         res.json({ success: true, message: "element created", result: newElement });
     }
     catch (err) {
@@ -172,7 +172,7 @@ router.post("/", guard.check(["admin"]), async (req, res, next) => {
  */
 router.get("/:id", async (req, res, next) => {
     try {
-        const r = await db.model.News.findAll({
+        const r = await db.model.NewsArticle.findAll({
             where: { id: req.params.id },
             attributes: ['id', 'headline', 'content', 'imageurl', ['createdAt', 'published']],
             include: [
@@ -234,7 +234,7 @@ router.get("/:id", async (req, res, next) => {
  */
 router.delete("/:id", guard.check(["admin"]), async (req, res, next) => {
     try {
-        const r = await db.model.News.destroy({
+        const r = await db.model.NewsArticle.destroy({
             where: { id: req.params.id },
         });
         if (!r) {
@@ -409,7 +409,7 @@ router.get("/comments/:id", async (req, res, next) => {
                     attributes: ['id', 'username'],
                 },
                 {
-                    model: db.model.News,
+                    model: db.model.NewsArticle,
                     attributes: ['id', 'headline', 'content', 'imageurl', ['createdAt', 'published']],
                     include: {
                         model: db.model.Users,

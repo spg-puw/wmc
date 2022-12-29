@@ -19,8 +19,8 @@ exports.connect = () => {
         );
     }
 
-    class News extends Model { }
-    News.init({
+    class NewsArticle extends Model { }
+    NewsArticle.init({
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -41,7 +41,7 @@ exports.connect = () => {
         }
     }, {
         sequelize,
-        modelName: 'news',
+        modelName: 'newsarticle',
         paranoid: true,
         indexes: [
             {
@@ -102,10 +102,10 @@ exports.connect = () => {
     // associations
     Users.hasMany(Comments);
     Comments.belongsTo(Users); //FK: userId
-    News.hasMany(Comments);
-    Comments.belongsTo(News); //FK: newsId
-    Users.hasMany(News, { foreignKey: 'author_userId' });
-    News.belongsTo(Users, { foreignKey: 'author_userId' })
+    NewsArticle.hasMany(Comments, { foreignKey: 'articleId' });
+    Comments.belongsTo(NewsArticle, { foreignKey: 'articleId' });
+    Users.hasMany(NewsArticle, { foreignKey: 'author_userId' });
+    NewsArticle.belongsTo(Users, { foreignKey: 'author_userId' });
 
     sequelize
         .sync({
@@ -146,7 +146,7 @@ exports.connect = () => {
                 console.log(`table ${r.constructor.name}: inserted id ${r.id}`.yellow);
             });
 
-            await News.bulkCreate([
+            await NewsArticle.bulkCreate([
                 { author_userId: 1, headline: 'HTL Spengergasse ist toll', content: 'hier steht was', imageurl: 'https://www.spengergasse.at/wp-content/uploads/2022/11/AnimationNeu-400x290.jpg' },
                 { author_userId: 2, headline: 'AR Technologie wird besser', content: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.', imageurl: 'https://www.spengergasse.at/wp-content/uploads/2020/02/shutterstock_1456783511-400x290.jpg' },
                 { author_userId: 1, headline: 'Alien VR Headsets für Studierende', content: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.', imageurl: 'https://www.spengergasse.at/wp-content/uploads/2020/02/shutterstock_1036798225-400x290.jpg' },
@@ -164,11 +164,11 @@ exports.connect = () => {
             });
 
             await Comments.bulkCreate([
-                { userId: 1, newsId: 1, commentText: 'ja, stimme zu', commentTime: DataTypes.DATE.NOW },
-                { userId: 2, newsId: 1, commentText: 'ich auch', commentTime: DataTypes.DATE.NOW },
-                { userId: 2, newsId: 8, commentText: 'nicht Roboter, es sind die Aliens', commentTime: DataTypes.DATE.NOW },
-                { userId: 3, newsId: 8, commentText: 'JA! sie sind unter uns!', commentTime: DataTypes.DATE.NOW },
-                { userId: 3, newsId: 8, commentText: 'ich sehe sie', commentTime: DataTypes.DATE.NOW },
+                { userId: 1, articleId: 1, commentText: 'ja, stimme zu', commentTime: DataTypes.DATE.NOW },
+                { userId: 2, articleId: 1, commentText: 'ich auch', commentTime: DataTypes.DATE.NOW },
+                { userId: 2, articleId: 8, commentText: 'nicht Roboter, es sind die Aliens', commentTime: DataTypes.DATE.NOW },
+                { userId: 3, articleId: 8, commentText: 'JA! sie sind unter uns!', commentTime: DataTypes.DATE.NOW },
+                { userId: 3, articleId: 8, commentText: 'ich sehe sie', commentTime: DataTypes.DATE.NOW },
             ]).then((res) => {
                 for (const r of res) {
                     console.log(`table ${r.constructor.name}: inserted id ${r.id}`.yellow);
@@ -185,7 +185,7 @@ exports.connect = () => {
 
     db = {
         model: {
-            News: News,
+            NewsArticle: NewsArticle,
             Users: Users,
             Comments: Comments,
         },
