@@ -154,7 +154,7 @@ router.post("/", guard.check(["admin"]), async (req, res, next) => {
  *         required: true
  *         description: id of the news article
  *         schema:
- *           type: string
+ *           type: integer
  *           example: 1
  *     responses:
  *       200:
@@ -170,7 +170,7 @@ router.post("/", guard.check(["admin"]), async (req, res, next) => {
  *             schema:
  *               $ref: '#/components/schemas/APIResponse'
  */
-router.get("/:id", async (req, res, next) => {
+router.get("/:id(\\d+)", async (req, res, next) => {
     try {
         const r = await db.model.NewsArticle.findAll({
             where: { id: req.params.id },
@@ -214,7 +214,7 @@ router.get("/:id", async (req, res, next) => {
  *         required: true
  *         description: id of the news article
  *         schema:
- *           type: string
+ *           type: integer
  *           example: 1
  *     responses:
  *       200:
@@ -232,7 +232,7 @@ router.get("/:id", async (req, res, next) => {
  *             schema:
  *               $ref: '#/components/schemas/APIResponse'
  */
-router.delete("/:id", guard.check(["admin"]), async (req, res, next) => {
+router.delete("/:id(\\d+)", guard.check(["admin"]), async (req, res, next) => {
     try {
         const r = await db.model.NewsArticle.destroy({
             where: { id: req.params.id },
@@ -262,7 +262,7 @@ router.delete("/:id", guard.check(["admin"]), async (req, res, next) => {
  *         required: true
  *         description: id of the news article
  *         schema:
- *           type: string
+ *           type: integer
  *           example: 1
  *     responses:
  *       200:
@@ -280,7 +280,7 @@ router.delete("/:id", guard.check(["admin"]), async (req, res, next) => {
  *             schema:
  *               $ref: '#/components/schemas/APIResponse'
  */
-router.get("/:id/comments", async (req, res, next) => {
+router.get("/:id(\\d+)/comments", async (req, res, next) => {
     try {
         const r = await db.model.Comments.findAll({
             where: { newsId: req.params.id },
@@ -314,7 +314,7 @@ router.get("/:id/comments", async (req, res, next) => {
  *         required: true
  *         description: id of the news article
  *         schema:
- *           type: string
+ *           type: integer
  *           example: 1
  *     requestBody:
  *       description: content
@@ -347,7 +347,7 @@ router.get("/:id/comments", async (req, res, next) => {
  *             schema:
  *               $ref: '#/components/schemas/APIResponse'
  */
-router.post("/:id/comments", guard.check(["postcomment"]), async (req, res, next) => {
+router.post("/:id(\\d+)/comments", guard.check(["postcomment"]), async (req, res, next) => {
     try {
         const newsId = req.params.id;
         const userId = req.user.userId;
