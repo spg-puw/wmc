@@ -309,3 +309,5 @@ dist
 **/__*.txt
 **/__TODO/
 **/__*/
+production.sqlite3
+development.sqlite3
