@@ -307,6 +307,7 @@ dist
 **/.DS_Store
 **/._*
 **/__*.txt
+**/__*.js
 **/__TODO/
 **/__*/
 production.sqlite3
