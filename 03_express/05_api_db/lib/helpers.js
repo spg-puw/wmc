@@ -11,7 +11,7 @@ module.exports.omit = (obj, key) => { const { [key]: ignore, ...rest } = obj; re
 
 module.exports.hash = (cleartext) => {
     const hashIdentifier = '$6$';
-    const salt = 'ohH6xooL';
+    const salt = process.env.HASH_SALT ?? 'salt';
     return hashIdentifier + createHash('sha512').update(salt + cleartext).digest('hex');
 }
 
