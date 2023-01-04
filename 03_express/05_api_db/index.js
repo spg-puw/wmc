@@ -42,6 +42,7 @@ app.set("views", "./views");
 app.locals.moment = require('moment'); //date and time lib
 
 //routes
+app.use("/api", routes);
 app.use("/", routes);
 
 //error handler
