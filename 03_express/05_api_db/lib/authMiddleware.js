@@ -12,8 +12,11 @@ router.use(expressjwt({
     requestProperty: "user", //jwt data will be stored in req.user
     credentialsRequired: false, //do not throw error when token not present - just identify user; throws error when troken wrong!
     getToken: (req) => {
-        console.log(`${'authMiddleware'.red}: found jwt token, use it for further processing`)
-        return getJwtTokenFromReq(req);
+        const token = getJwtTokenFromReq(req);
+        if (token) {
+            console.log(`${'authMiddleware'.red}: found jwt token, use it for further processing`)
+        }
+        return token;
     },
 }), function (err, req, res, next) { //jwt error handler
     if (err.name === 'UnauthorizedError') {
