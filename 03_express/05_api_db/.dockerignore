@@ -1,0 +1,7 @@
+node_modules
+
+*.md
+!README.md
+
+# ignore existing db
+**/*.sqlite3
