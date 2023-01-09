@@ -8,6 +8,11 @@
   },
   "scripts": {
     "dev": "node index.js",
+    "dev-babel": "node ./node_modules/@babel/node/bin/babel-node.js index.js",
+    "dev-dist": "node dist/index.js",
+    "dev2": "node ./node_modules/nodemon/bin/nodemon.js index.js",
+    "dev2-babel": "node ./node_modules/nodemon/bin/nodemon.js --exec ./node_modules/@babel/node/bin/babel-node.js index.js”",
+    "build": "node ./node_modules/@babel/cli/bin/babel.js --ignore node_modules --delete-dir-on-start --include-dotfiles -D . -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -36,6 +41,10 @@
     "swagger-ui-express": "^4.6.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.20.7",
+    "@babel/core": "^7.20.12",
+    "@babel/node": "^7.20.7",
+    "@babel/preset-env": "^7.20.2",
     "nodemon": "^2.0.20"
   }
 }
