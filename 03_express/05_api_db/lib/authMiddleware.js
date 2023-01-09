@@ -5,7 +5,7 @@ require("colors");
 const getJwtTokenFromReq = require("../lib/helpers").getJwtTokenFromReq;
 
 router.use(expressjwt({
-    secret: process.env.JWT_SECRET,
+    secret: process.env.JWT_SECRET ?? 'somethingsecret',
     algorithms: ["HS256"],
     audience: process.env.JWT_AUD,
     issuer: process.env.JWT_ISS,

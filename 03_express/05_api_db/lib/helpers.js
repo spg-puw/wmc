@@ -1,5 +1,5 @@
 const entities = require('html-entities');
-const createHash = require('node:crypto').createHash;
+const createHash = require('node:crypto').createHash; //old: npm i crypto; require("crypto")
 const jwt = require("jsonwebtoken");
 
 function omitPassword(user) {
