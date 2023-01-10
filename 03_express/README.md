@@ -2,7 +2,7 @@
 
 Express ist ein NodeJS Framework für Webapplikationen, welches sehr erweiterbar ist.
 
-> Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.<br>
+> Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.<br />
 > (siehe http://expressjs.com/)
 
 ## Installation
@@ -37,7 +37,7 @@ Mit dem "Routing" gibt man dem Webserver die Information, welcher Programmcode b
 
 Man kann sich Routing als Regelwerk vorstellen, die dem Express-Server sagt, welche Funktion bei welchem HTTP-Aufruf ausgeführt werden soll:
 
-```
+```text
 GET   /                     -> function seiteIndex(req, res) { ... }
 GET   /assets/katze.jpg     -> static middleware
 POST  /api/login            -> function apiLogin(req, res) { ... }
@@ -82,7 +82,8 @@ Express kann beliebig erweitert werden, typischerweise wird dazu sog. Middleware
 Ein Webrequest kann mehrere Middleware Schritte durchlaufen, bis sie zum eigentlichen Handler kommt oder in manchen Fällen (z.B. Prüfung ob User eingeloggt ist schlägt fehl) durch eine Middleware abgefangen wird.
 
 **Beispiel für eine Middlewarekonfiguration**:
-```
+
+```text
 Express-Webrequest
     `-> Cookie-Middleware: liest den Cookie-Header und speichert den Inhalt in req.cookies
         `-> Logincheck-Middleware: prüft ob Pfad mit /api/ beginnt und User eingeloggt ist (z.B. Cookie)
@@ -97,7 +98,7 @@ Ein typisches Szenario, wo wir eine Middleware einsetzen wollen, die einen Aufru
 
 Ergänzend zum obigen Beispiel (Routing) würde sich unsere beispielhafte Middlewarekonfiguration folgendermaßen verhalten:
 
-```
+```text
 GET   /                     -> durchläuft jede Middleware und landet beim Handler für die Hauptseite
 GET   /assets/katze.jpg     -> durchläuft die Middlewares bis zur static files Middleware;
                                es wird nach der Datei am Dateisystem des Express-Servers gesucht und
@@ -110,7 +111,6 @@ POST  /neuerbeitrag         -> durchläuft cookie und logincheck Middleware
                                die Verarbeitung ab und schickt eine Fehlermeldung, dass man nicht
                                eingeloggt ist
 ```
-
 
 Eine Middleware wird in Express generell wie folgt eingebunden:
 
@@ -218,14 +218,23 @@ Mehr dazu (mit vielen Beispielen) unter: http://expressjs.com/en/guide/database-
 Express Applikationen können bei komplexeren Applikationen etwas verwirrend sein, daher kann man die Debugging-Informationen mit der Umgebungsvariable `DEBUGGING` einfschalten. Falls requests lange dauern, kann mittels Debugging auch schnell ermittelt werden, welche Komponenten der Applikation besonder viel Zeit beanspruchen.
 
 Das Programm wird dann wie folgt mit Debug-Informationen gestartet:
+
 * Windows: `set DEBUG=express:* & node index.js`
 * Linux und macOS: `DEBUG=express:* node index.js`
 
 ## Netzwerkverkehr mitprotokollieren
 
-**TODO**: Dieser Abschnitt wird noch ergänzt.
+In vielen Situationen kann es dem Entwickler helfen, den Netzwerkverkehr der Applikation zu protokollieren. Am eigenen Computer ist das natürlich leicht mittels [Wireshark](https://www.wireshark.org/) zu bewerkstelligen. Auf remote Computern (z.B. einem Server) kann der Netzwerkverkehr beispielsweise mittels [sshdump+Wireshark](https://www.wireshark.org/docs/man-pages/sshdump.html), tcpdump etc. aufgenommen werden.
 
-* auf Dev-Computer
-* auf remote server
-* Probleme mit SSL und Lösungen
-* SSL-Decryption am Client (Browser)
+Ein spezielles Problem stellt die Verschlüsselung dar; hier ist es zunächst sinnvoll zwei Szenarien zu unterscheiden:
+
+```text
+  client (browser)  <--(1.)-->  nodejs/express app  <--(2.)-->  remote server/api
+```
+
+1. ein Client (Browser) fragt bei der Applikation via https an; hier bieten sich die Devtools im Browser an, vor allem die eingebauten Netzwerktools; es ist möglich http und https Traffic etc. unverschlüsselt zu sehen. Als Alternative kann man die Applikation auch unverschlüsselt laufen lassen und den Netzwerkverkehr mitprotokollieren.
+2. die Applikation fragt bei einem fremden Server nach zusätzlichen Daten um den request zu bearbeiten (z.B. Punktabfrage beim Moodleserver, Wetterdaten aus dem Internet etc.). Diese Daten werden idR verschlüsselt (https) übertragen und bei Fehlern hilft ein 'einfacher' Mitschnitt mittels Wireshark o.ä. nicht weiter - der Netzwerkverkehr ist verschlüsselt!<br />
+Eine Lösungsmöglichkeit wäre bspw. ein Proxy (+ Zertifikatscheck ausschalten), noch besser ist allerdings ein sog. TLS-Keylog. Dabei weist man Anwendungen mit TLS-Verschlüsselung an, die Schlüssel in eine Datei zu exportieren, damit man den Netzwerkverkehr mit Wireshark mitprotoollieren kann. Viele Anwendungen unterstützen das über die ENV-Variablen, NodeJS kann explizit mit folgendem Kommando angewiesen werden:<br />
+`node --tls-keylog=/tmp/tlskeylog.txt`<br />
+Nun kann man den mitprotokollierten Netzwerkverkehr in Wireshark entschlüsseln.<br />
+`Wireshark Menü -> Einstellungen/Preferences -> Protocols -> TLS -> Dateipfad [z.B. /tmp/tlskeylog.txt] in (Pre)-Master-Secret log filename`
