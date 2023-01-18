@@ -9,10 +9,21 @@ function omitPassword(user) {
 
 module.exports.omit = (obj, key) => { const { [key]: ignore, ...rest } = obj; return rest; }
 
-module.exports.hash = (cleartext) => {
+module.exports.hash = (cleartext, salt) => {
+    salt = salt ?? process.env.HASH_SALT ?? 'someUNSAFEsalt'; //salt can optionally be overwritten, which *should* be done for every user
+
     const hashIdentifier = '$6$';
-    const salt = process.env.HASH_SALT ?? 'salt';
-    return hashIdentifier + createHash('sha512').update(salt + cleartext).digest('hex');
+    const digestion = 'hex' //hex or base64
+
+    const iterations = Math.min(process.env.HASH_ITERATIONS ?? 100_000,100_000) //we hash >= 100.000 times
+
+    let current_hash = salt + cleartext //we only add the salt one time, as the hash could be predicted if we do it every iteration
+
+    for(let iteration=0;iteration<iterations;iteration++) {
+        current_hash = createHash('sha512').update(current_hash).digest(digestion) //we continously hash (iterations) times
+    }
+
+    return hashIdentifier + current_hash;
 }
 
 module.exports.generateJwtToken = (userId, permissions) => {
@@ -21,7 +32,7 @@ module.exports.generateJwtToken = (userId, permissions) => {
         //scope: permissions.join(" "),
         permissions: permissions,
     };
-    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '28d', audience: process.env.JWT_AUD, issuer: process.env.JWT_ISS });
+    const token = jwt.sign(payload, process.env.JWT_SECRET ?? "somethingsecret", { expiresIn: '28d', audience: process.env.JWT_AUD ?? "audience", issuer: process.env.JWT_ISS ?? "issuer" });
     return token;
 }
 
