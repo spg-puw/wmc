@@ -7,8 +7,8 @@ const getJwtTokenFromReq = require("../lib/helpers").getJwtTokenFromReq;
 router.use(expressjwt({
     secret: process.env.JWT_SECRET ?? 'somethingsecret',
     algorithms: ["HS256"],
-    audience: process.env.JWT_AUD,
-    issuer: process.env.JWT_ISS,
+    audience: process.env.JWT_AUD ?? "audience",
+    issuer: process.env.JWT_ISS ?? "issuer",
     requestProperty: "user", //jwt data will be stored in req.user
     credentialsRequired: false, //do not throw error when token not present - just identify user; throws error when troken wrong!
     getToken: (req) => {
