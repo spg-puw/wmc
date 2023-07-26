@@ -23,6 +23,43 @@ Installiere folgende Software:
 - Moderne Webentwicklung: Frontend, Backend, APIs
 - Unterschied clientseitiges und serverseitiges JS
 
+
+### [2. JavaScript Grundlagen](02_javascript)
+
+Alle Kapitel wurden aus dem Repo von Koll. Schletz übernommen und ergänzt.
+
+- Intro
+- Variablen und Datentypen
+- JSON, Arrays und Sets
+- Funktionen
+  - Callbacks und Closures
+  - Prototype, this und new
+  - Arrow functions und Arraymethoden
+- Classes
+- Modules
+
+### [3. Einfaches Backend mit NodeJS und Express](03_express)
+
+- Installation
+- Routing
+- Middleware
+- Template Engine und Errorhandling
+- Proxy
+- Datenbanken
+- Debugging (inkl. Netzwerkverkehr)
+
+<!--
+### 4. Directus
+-->
+
+<!--
+### 4. VueJS
+-->
+
+<!--
+### 4. NuxtJS
+-->
+
 ## Nutzungsbedingungen
 
 Dieses Repository kann bis auf Widerruf im Unterricht an der Spengergasse verwendet werden. Bei der Verwendung von Unterlagen oder Beispielen sind die Originalquellen (dieses Repo) und **https://github.com/schletz/Wmc** anzugeben.
