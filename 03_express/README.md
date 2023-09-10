@@ -181,7 +181,9 @@ Weitere nützliche Express-Middleware kann leicht im Internet gefunden werden, d
 
 ## Template Engines
 
-**TODO**: Dieser Abschnitt wird noch ergänzt.
+Mit Template Engines können dynamische Inhalte in statische Templates (Vorlagen) eingefügt werden. Es können damit recht leicht vom express Server HTML-Seiten generiert werden. Wichtig ist zu verstehen, dass der *dynamische* Inhalt vom Server generiert wird und vom Server ein 'vorgerenderter' HTML Inhalt ausgeliefert wird; damit unterscheidet sich diese Technik fundamental von modernen Frameworks wie Vue/React/Angular wo dies vor allem am Client passiert (mit Ausnahmen).
+
+Es stehen mehrere Template Engines zur Verfügung: pug, mustache, ejs etc.
 
 Mehr dazu unter: http://expressjs.com/en/guide/using-template-engines.html
 
