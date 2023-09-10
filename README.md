@@ -17,12 +17,14 @@ Installiere folgende Software:
 
 ### [1. Einführung in NodeJS](01_node)
 
+- Grundbegriffe
 - Was ist NodeJS
+- Dateitypen
 - Paketmanager npm
 - Traditionelle Webentwicklung
 - Moderne Webentwicklung: Frontend, Backend, APIs
 - Unterschied clientseitiges und serverseitiges JS
-
+- Demos
 
 ### [2. JavaScript Grundlagen](02_javascript)
 
@@ -48,12 +50,23 @@ Alle Kapitel wurden aus dem Repo von Koll. Schletz übernommen und ergänzt.
 - Datenbanken
 - Debugging (inkl. Netzwerkverkehr)
 
+### [4. Directus](04_directus)
+
+- Einführung
+- Warum Directus?
+- Installationsschritte
+- Quick-Start Guide
+- Erweiterungen
+  - Endpoints
+  - Hooks
+- Deployment
+
 <!--
-### 4. Directus
+### 5. VueJS
 -->
 
 <!--
-### 4. VueJS
+### 6. NuxtJS
 -->
 
 <!--
