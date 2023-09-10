@@ -1,8 +1,6 @@
 # Webentwicklung und Mobile Computing an der HTL Spengergasse
 
-Dieses Repository ist stark an das Repo von Koll. Michael [Schletz](https://github.com/schletz/Wmc) angelehnt; viele Beispiele und Inhalte wurden daraus mit seiner Zustimmung übernommen und angepasst.
-
-An dieser Stelle möchte ich Koll. Schletz herzlich Danken! Wer noch mehr Wissen möchte, kann sein [Repository](https://github.com/schletz/Wmc) ansehen.
+Dieses Repository verwendet Inhalt aus dem Repo von Koll. Michael [Schletz](https://github.com/schletz/Wmc); einige Beispiele und Inhalte wurden daraus mit seiner Zustimmung übernommen und angepasst. An dieser Stelle möchte ich Koll. Schletz herzlich Danken!
 
 ## Benötigte Software ([zur Anleitung](misc/Software_Installation.md))
 
@@ -75,7 +73,9 @@ Alle Kapitel wurden aus dem Repo von Koll. Schletz übernommen und ergänzt.
 
 ## Nutzungsbedingungen
 
-Dieses Repository kann bis auf Widerruf im Unterricht an der Spengergasse verwendet werden. Bei der Verwendung von Unterlagen oder Beispielen sind die Originalquellen (dieses Repo) und **https://github.com/schletz/Wmc** anzugeben.
+Dieses Repository kann bis auf Widerruf im Unterricht an der Spengergasse verwendet werden. Bei der Verwendung von Unterlagen oder Beispielen sind die Originalquellen (dieses Repo) und das [Repo von Koll. Schletz](https://github.com/schletz/Wmc) anzugeben.
+
+Bei Fehlern, Ergänzungen etc. bitte einfach ein Mail senden oder via PR.
 
 ## Lehrplan
 
