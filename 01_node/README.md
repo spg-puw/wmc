@@ -1,4 +1,4 @@
-# 1. Einführung in NodeJS
+# Einführung in NodeJS
 
 ## Inhalt
 
