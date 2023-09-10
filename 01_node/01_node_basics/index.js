@@ -38,4 +38,5 @@ function aussen() {
     innen();
 }
 
-console.log(`Nur das Alter der Person: ${meinJsonObjekt.age}`);
+console.log(`hilfreich beim debuggen`);
+aussen();
