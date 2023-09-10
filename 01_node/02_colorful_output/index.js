@@ -1,5 +1,5 @@
 require("colors");
-const chalk = require("chalk");
+// const chalk = require("chalk"); // ACHTUNG: Fehler
 
 function greet(name) {
     return `Hello ${name}!`;
