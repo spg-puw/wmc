@@ -2,14 +2,32 @@
 
 ## Inhalt
 
+- Grundbegriffe
 - Was ist NodeJS
-- Unterschied clientseitiges und serverseitiges JS
+- Dateitypen
 - Paketmanager npm
 - Traditionelle Webentwicklung
 - Moderne Webentwicklung: Frontend, Backend, APIs
+- Unterschied clientseitiges und serverseitiges JS
 - Demos
 
 [zurück](../README.md)
+
+## Grundbegriffe
+
+Das Gebiet der Webentwicklung ist sehr breit - es existieren zahlreiche Programmiersprachen, Frameworks etc. Generell gibt es natürlich nicht *die* Programmiersprache oder ein ganz bestimmtes Framework für alle erdenklichen Anwendungszwecke. Welche Programmiersprache, welches Framework etc. sich für ein bestimmtes Projekt besonders eigenen ist sicherlich ein Thema von anderen Unterrichtsgegenständen und wird hier nicht weiter behandelt.
+
+In WMC wird in diesem Kurs JavaScript sowie nodejs, express, jest, Vue, etc. verwendet.
+
+Einige wichte Begriffe sollen daher an dieser Stelle erwähnt werden:
+
+* Paketmanager / package manager: Softwarepakete aus Drittquellen können installiert, geupdated, verwaltet werden. Beispiele: npm, yarn, pnpm
+* compiler: wandelt monderne Sprachfeatures und erweiterte Syntax (z.B. JSX, type annotations) in für den Browser verarbeitbaren Code um. Beispiele: Babel, TypeScript
+* bundler: erlaubt Zusammenfassung von modularem Code in Pakete, um bspw. die Ladezeit zu optimieren. Beispiele: webpack, parcel, esbuild
+* minifier: macht den geschriebene Code kompakter, damit dieser schneller geladen wird (z.B. Kommentare entfernen)
+* linter: prüft Code auf häufige Fehler. Beispiel: eslint
+* test runner: erlaubt das Ausführen von Tests. Beispiel: jest
+* server: bearbeitet Anfragen von Clients. Beispiel (für Web/API): express
 
 ## Was ist NodeJS
 
@@ -33,6 +51,18 @@ JS-Code für NodeJS wird üblicherweise in der Kommandozeile so ausgeführt:
 ```shell
 node dateiname.js
 ```
+
+## Dateiendungen
+
+NodeJS führt JavaScript-Code aus und Projekte werden in der Regel externe Softwareteile aus diversen Paketen benutzen. Die Pakete werden beispielsweise über den Paketmanager npm (siehe nächster Abschnitt) verwaltet. node bietet mehrere Techniken an, um externen Code einzubinden (z.B. `require(...)` oder `import`) und es ist wichtig schon zu Beginn die Unterschiede zu kennen, um bei Fehlern die Ursache zu erkennen ([hier Details](../02_javascript/README.md)).
+
+* `.js` Dateien sind in der Regel CommonJS Dateien (außer es wird explizit anders angegeben) und erlauben die Einbindung von Paketen mit `require(...)`
+* `.cjs` sind auch CommonJS Dateien
+* `.mjs` Dateien sind sog. ES-Module und die Eindung von Paketen erfolgt über `import`
+* wird beispielsweise in einer `.mjs` Datei ein Paket mit `require(...)` geladen, so wird eine Fehlermeldung (require is not defined in ES module scope) ausgegeben.
+* wird ein `import` in einer CommonJS Datei versucht, so wird ebenfalls eine Fehlermeldung ausgegeben (cannot use import statement outside a module)
+* Dateien mit der Endung `.test.js` oder `.spec.js` beinhalten in der Regel Testcode
+* bestimmte Frameworks bieten erweiterte Funktionen und auch Dateitypen/-endungen. Beispielsweise hat VueJS sogenannte Single-File Components (SFC) mit der Dateiendung `.vue`, bei der HTML-Templates, CSS und JS-Code in einer Datei zusammenfasst werden. Damit node diese Dateien verarbeiten kann wird ein spezielles build setup benötigt, bei VueJS ist es beispielsweise Vite ([mehr hier](https://vuejs.org/guide/scaling-up/sfc.html))
 
 ## Paketmanager npm
 
@@ -70,7 +100,10 @@ found 0 vulnerabilities
 Anmerkungen:
 
 * npm Pakete liegen als source code im `node_modules` Ordner, dieser Ordner wird bei größeren Projekten daher tausende Dateien beinhalten. Der Ordner sollte daher ähnlich wie bei Git nicht kopiert werden.
+* Wenn git genutzt wird, dann sollte der Ordner `node_modules` in `.gitignore` inkludiert werden.
 * nicht alle npm Pakete sind überall verwendbar, achte hier auf die Dokumentation v.a. ob CommonJS (require) und/oder ES6-Module (import) verwendet wird.
+* Es gibt auch andere Paketmanager, wie beispielsweise yarn.
+* Werden Pakete mit npn installiert, so wird automatisch die Datei `package-lock.json` neu angelegt bzw. erweitert. Die Datei enthält die genauen Versionen der Pakete. In der `package.json` sind nur die Versionen der direkt installierten Pakete enthalten, die Versionen der Abhängigkeiten dieser Pakete findet sich nur in der Datei `package-lock.json`. Mit dem Versionslocking sollen Probleme verhindert und ein einheitlicher, nachvollziehbarer Softwarestand hergestellt werden.
 
 ## Traditionelle Webentwicklung
 
@@ -139,7 +172,7 @@ Es befinden sich diverse Demos in diesem Repository. Die Node-Pakete für Demos 
 cd 01_node_basics
 npm install
 node index.js
-````
+```
 
 Ein laufendes Node-Programm (z.B. ein Webserver) kann mit *Ctrl+C* in der Kommandozeile wieder beendet werden.
 
