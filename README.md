@@ -59,17 +59,10 @@ Alle Kapitel wurden aus dem Repo von Koll. Schletz übernommen und ergänzt.
   - Hooks
 - Deployment
 
-<!--
-### 5. VueJS
--->
 
-<!--
-### 6. NuxtJS
--->
+### [5. Vue.js](05_vuejs)
 
-<!--
-### 4. NuxtJS
--->
+### [6. NuxtJS](06_nuxtjs)
 
 ## Nutzungsbedingungen
 
