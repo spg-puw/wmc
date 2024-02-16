@@ -74,7 +74,7 @@ Standardmäßig wird der Ordner `extensions` mit einigen Unterordnern für Erwei
 
 Mit Endpoint-Extensions können ganz normale express-endpoints mit eigenem Code geschrieben werden. Es wird das express-router Objekt sowie ein context-Objekt mit den Directus-Objekten/Services bereitgestellt.
 
-Folgendes Beispiel zeigt eine kleine Demoextension mit Endpoints. Den Code in `/extensions/endpoints/myextensionname/index.js` kopieren.
+Folgendes Beispiel zeigt eine kleine Demoextension mit Endpoints. Den Code in `/extensions/endpoints/myextensionname/index.mjs` kopieren.
 
 ```js
 export default {
@@ -92,8 +92,9 @@ export default {
       const users = await userService.readByQuery({ filter: { email: { _eq: userMail } }, fields: ['*'] });
       console.log(`das erscheint am Server auf der Konsole`);
       res.send(users);
+    });
   },
-};
+}
 ```
 
 Eine weitere Demostration mit einem Public-API-Proxy findet sich [hier](https://docs.directus.io/guides/extensions/endpoints-api-proxy.html).
@@ -110,7 +111,7 @@ Besonders wichtig sind folgende Hooks:
 - **action**: Action hooks execute *after* a defined event and receive data related to the event. Use action hooks when you need to automate responses to CRUD events on items or server actions.<br />Beispiel: E-Mail nach Erstellung eines Datensatzes versenden
 - **schedule**: Schedule hooks execute at certain points in time rather than when Directus performs a specific action. This is supported through node-schedule.<br />Beispiel: Code alle 15 Minuten laufen lassen
 
-Folgendes Beispiel zeigt eine kleine Demoextension mit Hooks. Den Code in `/extensions/hooks/myextensionname/index.js` kopieren.
+Folgendes Beispiel zeigt eine kleine Demoextension mit Hooks. Den Code in `/extensions/hooks/myextensionname/index.mjs` kopieren.
 
 ```js
 console.log('loading extension (info in server log)');
