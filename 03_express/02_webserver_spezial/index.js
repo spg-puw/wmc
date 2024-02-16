@@ -29,7 +29,7 @@ app.get('/quadrat', (req, res) => {
 
 app.get('/geheim', (req, res) => {
   const geheimzahl = Math.floor(Math.random() * 100);
-  if (geheimzahl == 42) {
+  if (geheimzahl >= 42) {
     res.set('Secret-HTTP-Header', 'answer to the ultimate question of everything');
   }
   res.send(`Hier befindet sich eine geheime Information: ${geheimzahl}`);
